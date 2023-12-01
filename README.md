@@ -2,11 +2,11 @@
     <img src="./public/icon.svg" width="128" alt="" />
 </div>
 
-# Uptime Kuma
+# Web Pulse
 
-Uptime Kuma is an easy-to-use self-hosted monitoring tool.
+Web Pulse is an easy-to-use self-hosted monitoring tool.
 
-<a target="_blank" href="https://github.com/louislam/uptime-kuma"><img src="https://img.shields.io/github/stars/louislam/uptime-kuma" /></a> <a target="_blank" href="https://hub.docker.com/r/louislam/uptime-kuma"><img src="https://img.shields.io/docker/pulls/louislam/uptime-kuma" /></a> <a target="_blank" href="https://hub.docker.com/r/louislam/uptime-kuma"><img src="https://img.shields.io/docker/v/louislam/uptime-kuma/latest?label=docker%20image%20ver." /></a> <a target="_blank" href="https://github.com/louislam/uptime-kuma"><img src="https://img.shields.io/github/last-commit/louislam/uptime-kuma" /></a>  <a target="_blank" href="https://opencollective.com/uptime-kuma"><img src="https://opencollective.com/uptime-kuma/total/badge.svg?label=Open%20Collective%20Backers&color=brightgreen" /></a>
+<a target="_blank" href="https://github.com/louislam/uptime-kuma"><img src="https://img.shields.io/github/stars/louislam/uptime-kuma" /></a> <a target="_blank" href="https://hub.docker.com/r/louislam/uptime-kuma"><img src="https://img.shields.io/docker/pulls/louislam/uptime-kuma" /></a> <a target="_blank" href="https://hub.docker.com/r/louislam/uptime-kuma"><img src="https://img.shields.io/docker/v/louislam/uptime-kuma/latest?label=docker%20image%20ver." /></a> <a target="_blank" href="https://github.com/louislam/uptime-kuma"><img src="https://img.shields.io/github/last-commit/louislam/uptime-kuma" /></a> <a target="_blank" href="https://opencollective.com/uptime-kuma"><img src="https://opencollective.com/uptime-kuma/total/badge.svg?label=Open%20Collective%20Backers&color=brightgreen" /></a>
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/louislam?label=GitHub%20Sponsors)](https://github.com/sponsors/louislam) <a href="https://weblate.kuma.pet/projects/uptime-kuma/uptime-kuma/">
 <img src="https://weblate.kuma.pet/widgets/uptime-kuma/-/svg-badge.svg" alt="Translation status" />
 </a>
@@ -17,23 +17,23 @@ Uptime Kuma is an easy-to-use self-hosted monitoring tool.
 
 Try it!
 
-- Tokyo Demo Server: https://demo.uptime.kuma.pet (Sponsored by [Uptime Kuma Sponsors](https://github.com/louislam/uptime-kuma#%EF%B8%8F-sponsors))
+-   Tokyo Demo Server: https://demo.uptime.kuma.pet (Sponsored by [Web Pulse Sponsors](https://github.com/louislam/uptime-kuma#%EF%B8%8F-sponsors))
 
 It is a temporary live demo, all data will be deleted after 10 minutes. Use the one that is closer to you, but I suggest that you should install and try it out for the best demo experience.
 
 ## ⭐ Features
 
-* Monitoring uptime for HTTP(s) / TCP / HTTP(s) Keyword / HTTP(s) Json Query / Ping / DNS Record / Push / Steam Game Server / Docker Containers
-* Fancy, Reactive, Fast UI/UX
-* Notifications via Telegram, Discord, Gotify, Slack, Pushover, Email (SMTP), and [90+ notification services, click here for the full list](https://github.com/louislam/uptime-kuma/tree/master/src/components/notifications)
-* 20-second intervals
-* [Multi Languages](https://github.com/louislam/uptime-kuma/tree/master/src/lang)
-* Multiple status pages
-* Map status pages to specific domains
-* Ping chart
-* Certificate info
-* Proxy support
-* 2FA support
+-   Monitoring uptime for HTTP(s) / TCP / HTTP(s) Keyword / HTTP(s) Json Query / Ping / DNS Record / Push / Steam Game Server / Docker Containers
+-   Fancy, Reactive, Fast UI/UX
+-   Notifications via Telegram, Discord, Gotify, Slack, Pushover, Email (SMTP), and [90+ notification services, click here for the full list](https://github.com/louislam/uptime-kuma/tree/master/src/components/notifications)
+-   20-second intervals
+-   [Multi Languages](https://github.com/louislam/uptime-kuma/tree/master/src/lang)
+-   Multiple status pages
+-   Map status pages to specific domains
+-   Ping chart
+-   Certificate info
+-   Proxy support
+-   2FA support
 
 ## 🔧 How to Install
 
@@ -45,19 +45,20 @@ docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name upti
 
 ⚠️ Please use a **local volume** only. Other types such as NFS are not supported.
 
-Uptime Kuma is now running on http://localhost:3001
+Web Pulse is now running on http://localhost:3001
 
 ### 💪🏻 Non-Docker
 
 Requirements:
-- Platform
-  - ✅ Major Linux distros such as Debian, Ubuntu, CentOS, Fedora and ArchLinux etc.
-  - ✅ Windows 10 (x64), Windows Server 2012 R2 (x64) or higher
-  - ❌ Replit / Heroku
-- [Node.js](https://nodejs.org/en/download/) 14 / 16 / 18 / 20.4
-- [npm](https://docs.npmjs.com/cli/) >= 7
-- [Git](https://git-scm.com/downloads)
-- [pm2](https://pm2.keymetrics.io/) - For running Uptime Kuma in the background
+
+-   Platform
+    -   ✅ Major Linux distros such as Debian, Ubuntu, CentOS, Fedora and ArchLinux etc.
+    -   ✅ Windows 10 (x64), Windows Server 2012 R2 (x64) or higher
+    -   ❌ Replit / Heroku
+-   [Node.js](https://nodejs.org/en/download/) 14 / 16 / 18 / 20.4
+-   [npm](https://docs.npmjs.com/cli/) >= 7
+-   [Git](https://git-scm.com/downloads)
+-   [pm2](https://pm2.keymetrics.io/) - For running Web Pulse in the background
 
 ```bash
 # Update your npm to the latest version
@@ -79,7 +80,8 @@ pm2 start server/server.js --name uptime-kuma
 
 
 ```
-Uptime Kuma is now running on http://localhost:3001
+
+Web Pulse is now running on http://localhost:3001
 
 More useful PM2 Commands
 
@@ -143,12 +145,12 @@ Telegram Notification Sample:
 
 ## Motivation
 
-* I was looking for a self-hosted monitoring tool like "Uptime Robot", but it is hard to find a suitable one. One of the close ones is statping. Unfortunately, it is not stable and no longer maintained.
-* Want to build a fancy UI.
-* Learn Vue 3 and vite.js.
-* Show the power of Bootstrap 5.
-* Try to use WebSocket with SPA instead of REST API.
-* Deploy my first Docker image to Docker Hub.
+-   I was looking for a self-hosted monitoring tool like "Uptime Robot", but it is hard to find a suitable one. One of the close ones is statping. Unfortunately, it is not stable and no longer maintained.
+-   Want to build a fancy UI.
+-   Learn Vue 3 and vite.js.
+-   Show the power of Bootstrap 5.
+-   Try to use WebSocket with SPA instead of REST API.
+-   Deploy my first Docker image to Docker Hub.
 
 If you love this project, please consider giving me a ⭐.
 
@@ -156,14 +158,13 @@ If you love this project, please consider giving me a ⭐.
 
 ⚠️ For any general or technical questions, please don't send me an email, as I am unable to provide support in that manner. I will not response if you asked such questions.
 
-I recommend using Google, GitHub Issues, or Uptime Kuma's Subreddit for finding answers to your question. If you cannot find the information you need, feel free to ask:
+I recommend using Google, GitHub Issues, or Web Pulse's Subreddit for finding answers to your question. If you cannot find the information you need, feel free to ask:
 
-- [GitHub Issues](https://github.com/louislam/uptime-kuma/issues)
-- [Subreddit r/Uptime kuma](https://www.reddit.com/r/UptimeKuma/)
+-   [GitHub Issues](https://github.com/louislam/uptime-kuma/issues)
+-   [Subreddit r/Web Pulse](https://www.reddit.com/r/UptimeKuma/)
 
 My Reddit account: [u/louislamlam](https://reddit.com/u/louislamlam).  
 You can mention me if you ask a question on Reddit.
-
 
 ## Contribute
 
@@ -179,10 +180,12 @@ https://github.com/louislam/uptime-kuma/wiki/Test-Pull-Requests
 Check out the latest beta release here: https://github.com/louislam/uptime-kuma/releases
 
 ### Bug Reports / Feature Requests
+
 If you want to report a bug or request a new feature, feel free to open a [new issue](https://github.com/louislam/uptime-kuma/issues).
 
 ### Translations
-If you want to translate Uptime Kuma into your language, please visit [Weblate Readme](https://github.com/louislam/uptime-kuma/blob/master/src/lang/README.md).
+
+If you want to translate Web Pulse into your language, please visit [Weblate Readme](https://github.com/louislam/uptime-kuma/blob/master/src/lang/README.md).
 
 ## Spelling & Grammar
 
@@ -190,4 +193,5 @@ Feel free to correct the grammar in the documentation or code.
 My mother language is not english and my grammar is not that great.
 
 ### Create Pull Requests
-If you want to modify Uptime Kuma, please read this guide and follow the rules here: https://github.com/louislam/uptime-kuma/blob/master/CONTRIBUTING.md
+
+If you want to modify Web Pulse, please read this guide and follow the rules here: https://github.com/louislam/uptime-kuma/blob/master/CONTRIBUTING.md

@@ -1,6 +1,6 @@
 {
-    "name": "Uptime Kuma",
-    "short_name": "Uptime Kuma",
+    "name": "Web Pulse",
+    "short_name": "Web Pulse",
     "start_url": "/",
     "background_color": "#fff",
     "display": "standalone",

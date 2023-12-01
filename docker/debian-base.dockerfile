@@ -1,5 +1,5 @@
 # DON'T UPDATE TO bullseye-slim, see #372.
-# There is no 20-buster-slim for armv7 unfortunately, 18-buster-slim is the last one for Uptime Kuma v1.
+# There is no 20-buster-slim for armv7 unfortunately, 18-buster-slim is the last one for Web Pulse v1.
 FROM node:18-buster-slim
 ARG TARGETPLATFORM
 

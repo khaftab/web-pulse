@@ -21,8 +21,12 @@
             class="form-select"
             required
         >
-            <option value="json">{{ $t("webhookBodyPresetOption", ["application/json"]) }}</option>
-            <option value="form-data">{{ $t("webhookBodyPresetOption", ["multipart/form-data"]) }}</option>
+            <option value="json">
+                {{ $t("webhookBodyPresetOption", ["application/json"]) }}
+            </option>
+            <option value="form-data">
+                {{ $t("webhookBodyPresetOption", ["multipart/form-data"]) }}
+            </option>
             <option value="custom">{{ $t("webhookBodyCustomOption") }}</option>
         </select>
 
@@ -64,8 +68,14 @@
 
     <div class="mb-3">
         <div class="form-check form-switch">
-            <input v-model="showAdditionalHeadersField" class="form-check-input" type="checkbox">
-            <label class="form-check-label">{{ $t("webhookAdditionalHeadersTitle") }}</label>
+            <input
+                v-model="showAdditionalHeadersField"
+                class="form-check-input"
+                type="checkbox"
+            />
+            <label class="form-check-label">{{
+                $t("webhookAdditionalHeadersTitle")
+            }}</label>
         </div>
         <div class="form-text">
             <i18n-t tag="p" keypath="webhookAdditionalHeadersDesc"> </i18n-t>
@@ -84,7 +94,8 @@
 export default {
     data() {
         return {
-            showAdditionalHeadersField: this.$parent.notification.webhookAdditionalHeaders != null,
+            showAdditionalHeadersField:
+                this.$parent.notification.webhookAdditionalHeaders != null,
         };
     },
     computed: {
@@ -99,10 +110,10 @@ export default {
         customBodyPlaceholder() {
             return `Example:
 {
-    "Title": "Uptime Kuma Alert - {{ monitorJSON['name'] }}",
+    "Title": "Web Pulse Alert - {{ monitorJSON['name'] }}",
     "Body": "{{ msg }}"
 }`;
-        }
+        },
     },
 };
 </script>

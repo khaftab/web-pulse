@@ -1,12 +1,12 @@
 # Codespaces
 
-You can modifiy Uptime Kuma in your browser without setting up a local development.
+You can modifiy Web Pulse in your browser without setting up a local development.
 
 ![image](https://github.com/louislam/uptime-kuma/assets/1336778/31d9f06d-dd0b-4405-8e0d-a96586ee4595)
 
 1. Click `Code` -> `Create codespace on master`
 2. Wait a few minutes until you see there are two exposed ports
-3. Go to the `3000` url, see if it is working 
+3. Go to the `3000` url, see if it is working
 
 ![image](https://github.com/louislam/uptime-kuma/assets/1336778/909b2eb4-4c5e-44e4-ac26-6d20ed856e7f)
 
