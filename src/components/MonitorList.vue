@@ -1,30 +1,43 @@
 <template>
-    <div class="shadow-box mb-3" :style="boxStyle">
+    <div
+        class="shadow-box mb-3"
+        style="box-shadow: 6px 6px 37px -7px rgba(106, 153, 78, 0.3)"
+    >
         <div class="list-header">
             <div class="header-top">
-                <button class="btn btn-outline-normal ms-2" :class="{ 'active': selectMode }" type="button" @click="selectMode = !selectMode">
+                <!-- <button class="btn btn-outline-normal ms-2" :class="{ 'active': selectMode }" type="button" @click="selectMode = !selectMode">
                     {{ $t("Select") }}
                 </button>
 
-                <div class="placeholder"></div>
+                <div class="placeholder"></div> -->
                 <div class="search-wrapper">
-                    <a v-if="searchText == ''" class="search-icon">
+                    <!-- <a v-if="searchText == ''" class="search-icon">
                         <font-awesome-icon icon="search" />
-                    </a>
-                    <a v-if="searchText != ''" class="search-icon" @click="clearSearchText">
+                    </a> -->
+                    <a
+                        v-if="searchText != ''"
+                        class="search-icon"
+                        @click="clearSearchText"
+                    >
                         <font-awesome-icon icon="times" />
                     </a>
                     <form>
                         <input
-                            v-model="searchText" class="form-control search-input" :placeholder="$t('Search...')"
+                            v-model="searchText"
+                            class="form-control search-input"
+                            :placeholder="$t('Search here...')"
                             autocomplete="off"
+                            style="width: 100% !important"
                         />
                     </form>
                 </div>
             </div>
-            <div class="header-filter">
-                <MonitorListFilter :filterState="filterState" @update-filter="updateFilter" />
-            </div>
+            <!-- <div class="header-filter">
+                <MonitorListFilter
+                    :filterState="filterState"
+                    @update-filter="updateFilter"
+                />
+            </div> -->
 
             <!-- Selection Controls -->
             <div v-if="selectMode" class="selection-controls px-2 pt-2">
@@ -34,17 +47,32 @@
                     type="checkbox"
                 />
 
-                <button class="btn-outline-normal" @click="pauseDialog"><font-awesome-icon icon="pause" size="sm" /> {{ $t("Pause") }}</button>
-                <button class="btn-outline-normal" @click="resumeSelected"><font-awesome-icon icon="play" size="sm" /> {{ $t("Resume") }}</button>
+                <button class="btn-outline-normal" @click="pauseDialog">
+                    <font-awesome-icon icon="pause" size="sm" />
+                    {{ $t("Pause") }}
+                </button>
+                <button class="btn-outline-normal" @click="resumeSelected">
+                    <font-awesome-icon icon="play" size="sm" />
+                    {{ $t("Resume") }}
+                </button>
 
                 <span v-if="selectedMonitorCount > 0">
-                    {{ $t("selectedMonitorCount", [ selectedMonitorCount ]) }}
+                    {{ $t("selectedMonitorCount", [selectedMonitorCount]) }}
                 </span>
             </div>
         </div>
-        <div ref="monitorList" class="monitor-list" :class="{ scrollbar: scrollbar }" :style="monitorListStyle">
-            <div v-if="Object.keys($root.monitorList).length === 0" class="text-center mt-3">
-                {{ $t("No Monitors, please") }} <router-link to="/add">{{ $t("add one") }}</router-link>
+        <div
+            ref="monitorList"
+            class="monitor-list"
+            :class="{ scrollbar: scrollbar }"
+            :style="monitorListStyle"
+        >
+            <div
+                v-if="Object.keys($root.monitorList).length === 0"
+                class="text-center mt-3"
+            >
+                {{ $t("No Monitors, please") }}
+                <router-link to="/add">{{ $t("add one") }}</router-link>
             </div>
 
             <MonitorListItem
@@ -60,7 +88,12 @@
         </div>
     </div>
 
-    <Confirm ref="confirmPause" :yes-text="$t('Yes')" :no-text="$t('No')" @yes="pauseSelected">
+    <Confirm
+        ref="confirmPause"
+        :yes-text="$t('Yes')"
+        :no-text="$t('No')"
+        @yes="pauseSelected"
+    >
         {{ $t("pauseMonitorMsg") }}
     </Confirm>
 </template>
@@ -95,7 +128,7 @@ export default {
                 status: null,
                 active: null,
                 tags: null,
-            }
+            },
         };
     },
     computed: {
@@ -114,7 +147,6 @@ export default {
                     height: "calc(100vh - 160px)",
                 };
             }
-
         },
 
         /**
@@ -125,50 +157,90 @@ export default {
         sortedMonitorList() {
             let result = Object.values(this.$root.monitorList);
 
-            result = result.filter(monitor => {
+            result = result.filter((monitor) => {
                 // filter by search text
                 // finds monitor name, tag name or tag value
                 let searchTextMatch = true;
                 if (this.searchText !== "") {
                     const loweredSearchText = this.searchText.toLowerCase();
                     searchTextMatch =
-                        monitor.name.toLowerCase().includes(loweredSearchText)
-                        || monitor.tags.find(tag => tag.name.toLowerCase().includes(loweredSearchText)
-                            || tag.value?.toLowerCase().includes(loweredSearchText));
+                        monitor.name
+                            .toLowerCase()
+                            .includes(loweredSearchText) ||
+                        monitor.tags.find(
+                            (tag) =>
+                                tag.name
+                                    .toLowerCase()
+                                    .includes(loweredSearchText) ||
+                                tag.value
+                                    ?.toLowerCase()
+                                    .includes(loweredSearchText)
+                        );
                 }
 
                 // filter by status
                 let statusMatch = true;
-                if (this.filterState.status != null && this.filterState.status.length > 0) {
-                    if (monitor.id in this.$root.lastHeartbeatList && this.$root.lastHeartbeatList[monitor.id]) {
-                        monitor.status = this.$root.lastHeartbeatList[monitor.id].status;
+                if (
+                    this.filterState.status != null &&
+                    this.filterState.status.length > 0
+                ) {
+                    if (
+                        monitor.id in this.$root.lastHeartbeatList &&
+                        this.$root.lastHeartbeatList[monitor.id]
+                    ) {
+                        monitor.status =
+                            this.$root.lastHeartbeatList[monitor.id].status;
                     }
-                    statusMatch = this.filterState.status.includes(monitor.status);
+                    statusMatch = this.filterState.status.includes(
+                        monitor.status
+                    );
                 }
 
                 // filter by active
                 let activeMatch = true;
-                if (this.filterState.active != null && this.filterState.active.length > 0) {
-                    activeMatch = this.filterState.active.includes(monitor.active);
+                if (
+                    this.filterState.active != null &&
+                    this.filterState.active.length > 0
+                ) {
+                    activeMatch = this.filterState.active.includes(
+                        monitor.active
+                    );
                 }
 
                 // filter by tags
                 let tagsMatch = true;
-                if (this.filterState.tags != null && this.filterState.tags.length > 0) {
-                    tagsMatch = monitor.tags.map(tag => tag.tag_id) // convert to array of tag IDs
-                        .filter(monitorTagId => this.filterState.tags.includes(monitorTagId)) // perform Array Intersaction between filter and monitor's tags
-                        .length > 0;
+                if (
+                    this.filterState.tags != null &&
+                    this.filterState.tags.length > 0
+                ) {
+                    tagsMatch =
+                        monitor.tags
+                            .map((tag) => tag.tag_id) // convert to array of tag IDs
+                            .filter((monitorTagId) =>
+                                this.filterState.tags.includes(monitorTagId)
+                            ).length > 0; // perform Array Intersaction between filter and monitor's tags
                 }
 
                 // Hide children if not filtering
                 let showChild = true;
-                if (this.filterState.status == null && this.filterState.active == null && this.filterState.tags == null && this.searchText === "") {
+                if (
+                    this.filterState.status == null &&
+                    this.filterState.active == null &&
+                    this.filterState.tags == null &&
+                    this.searchText === ""
+                ) {
                     if (monitor.parent !== null) {
                         showChild = false;
                     }
                 }
 
-                return searchTextMatch && statusMatch && activeMatch && tagsMatch && showChild;
+                return (
+                    searchTextMatch &&
+                    statusMatch &&
+                    activeMatch &&
+                    tagsMatch &&
+                    showChild
+                );
             });
 
             // Filter result by active state, weight and alphabetical
@@ -211,7 +283,7 @@ export default {
             }
 
             return {
-                "height": `calc(100% - ${listHeaderHeight}px)`
+                height: `calc(100% - ${listHeaderHeight}px)`,
             };
         },
 
@@ -225,8 +297,13 @@ export default {
          * @return {boolean} True if any filter is active, false otherwise.
          */
         filtersActive() {
-            return this.filterState.status != null || this.filterState.active != null || this.filterState.tags != null || this.searchText !== "";
-        }
+            return (
+                this.filterState.status != null ||
+                this.filterState.active != null ||
+                this.filterState.tags != null ||
+                this.searchText !== ""
+            );
+        },
     },
     watch: {
         searchText() {
@@ -328,16 +405,20 @@ export default {
         /** Pause each selected monitor */
         pauseSelected() {
             Object.keys(this.selectedMonitors)
-                .filter(id => this.$root.monitorList[id].active)
-                .forEach(id => this.$root.getSocket().emit("pauseMonitor", id));
+                .filter((id) => this.$root.monitorList[id].active)
+                .forEach((id) =>
+                    this.$root.getSocket().emit("pauseMonitor", id)
+                );
 
             this.cancelSelectMode();
         },
         /** Resume each selected monitor */
         resumeSelected() {
             Object.keys(this.selectedMonitors)
-                .filter(id => !this.$root.monitorList[id].active)
-                .forEach(id => this.$root.getSocket().emit("resumeMonitor", id));
+                .filter((id) => !this.$root.monitorList[id].active)
+                .forEach((id) =>
+                    this.$root.getSocket().emit("resumeMonitor", id)
+                );
 
             this.cancelSelectMode();
         },
@@ -438,5 +519,4 @@ export default {
     align-items: center;
     gap: 10px;
 }
-
 </style>

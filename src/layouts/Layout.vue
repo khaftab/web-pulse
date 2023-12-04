@@ -30,7 +30,8 @@
                     class="bi me-2 ms-4"
                     width="40"
                     height="40"
-                    data="/icon.svg"
+                    data="/icon.png"
+                    style="margin-right: 15px !important"
                 />
                 <span class="fs-4 title">{{ $t("Web Pulse") }}</span>
             </router-link>
@@ -47,15 +48,13 @@
 
             <ul class="nav nav-pills">
                 <li v-if="$root.loggedIn" class="nav-item me-2">
-                    <router-link to="/manage-status-page" class="nav-link">
-                        <font-awesome-icon icon="stream" />
-                        {{ $t("Status Pages") }}
+                    <router-link to="/dashboard" class="nav-link">
+                        {{ $t("Dashboard") }}
                     </router-link>
                 </li>
                 <li v-if="$root.loggedIn" class="nav-item me-2">
-                    <router-link to="/dashboard" class="nav-link">
-                        <font-awesome-icon icon="tachometer-alt" />
-                        {{ $t("Dashboard") }}
+                    <router-link to="/manage-status-page" class="nav-link">
+                        {{ $t("Custom Status Pages") }}
                     </router-link>
                 </li>
                 <li v-if="$root.loggedIn" class="nav-item">
@@ -64,7 +63,6 @@
                             <div class="profile-pic">
                                 {{ $root.usernameFirstChar }}
                             </div>
-                            <font-awesome-icon icon="angle-down" />
                         </div>
 
                         <!-- Header's Dropdown Menu -->
@@ -89,7 +87,7 @@
                             <li><hr class="dropdown-divider" /></li>
 
                             <!-- Functions -->
-                            <li>
+                            <!-- <li>
                                 <router-link
                                     to="/maintenance"
                                     class="dropdown-item"
@@ -128,7 +126,7 @@
                                     <font-awesome-icon icon="info-circle" />
                                     {{ $t("Help") }}
                                 </a>
-                            </li>
+                            </li> -->
 
                             <li
                                 v-if="
@@ -140,7 +138,6 @@
                                     class="dropdown-item"
                                     @click="$root.logout"
                                 >
-                                    <font-awesome-icon icon="sign-out-alt" />
                                     {{ $t("Logout") }}
                                 </button>
                             </li>

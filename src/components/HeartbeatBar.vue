@@ -5,17 +5,31 @@
                 v-for="(beat, index) in shortBeatList"
                 :key="index"
                 class="beat"
-                :class="{ 'empty': (beat === 0), 'down': (beat.status === 0), 'pending': (beat.status === 2), 'maintenance': (beat.status === 3) }"
+                :class="{
+                    empty: beat === 0,
+                    down: beat.status === 0,
+                    pending: beat.status === 2,
+                    maintenance: beat.status === 3,
+                }"
                 :style="beatStyle"
                 :title="getBeatTitle(beat)"
             />
         </div>
         <div
-            v-if="!$root.isMobile && size !== 'small' && beatList.length > 4 && $root.styleElapsedTime !== 'none'"
-            class="d-flex justify-content-between align-items-center word" :style="timeStyle"
+            v-if="
+                !$root.isMobile &&
+                size !== 'small' &&
+                beatList.length > 4 &&
+                $root.styleElapsedTime !== 'none'
+            "
+            class="d-flex justify-content-between align-items-center word"
+            :style="timeStyle"
         >
             <div>{{ timeSinceFirstBeat }} ago</div>
-            <div v-if="$root.styleElapsedTime === 'with-line'" class="connecting-line"></div>
+            <div
+                v-if="$root.styleElapsedTime === 'with-line'"
+                class="connecting-line"
+            ></div>
             <div>{{ timeSinceLastBeat }}</div>
         </div>
     </div>
@@ -40,7 +54,7 @@ export default {
         heartbeatList: {
             type: Array,
             default: null,
-        }
+        },
     },
     data() {
         return {
@@ -53,7 +67,6 @@ export default {
         };
     },
     computed: {
-
         /**
          * If heartbeatList is null, get it from $root.heartbeatList
          */
@@ -112,8 +125,10 @@ export default {
         },
 
         wrapStyle() {
-            let topBottom = (((this.beatHeight * this.hoverScale) - this.beatHeight) / 2);
-            let leftRight = (((this.beatWidth * this.hoverScale) - this.beatWidth) / 2);
+            let topBottom =
+                (this.beatHeight * this.hoverScale - this.beatHeight) / 2;
+            let leftRight =
+                (this.beatWidth * this.hoverScale - this.beatWidth) / 2;
 
             return {
                 padding: `${topBottom}px ${leftRight}px`,
@@ -129,12 +144,10 @@ export default {
                     transition: "all ease-in-out 0.25s",
                     transform: `translateX(${width}px)`,
                 };
-
             }
             return {
                 transform: "translateX(0)",
             };
-
         },
 
         beatStyle() {
@@ -152,7 +165,9 @@ export default {
          */
         timeStyle() {
             return {
-                "margin-left": this.numPadding * (this.beatWidth + this.beatMargin * 2) + "px",
+                "margin-left":
+                    this.numPadding * (this.beatWidth + this.beatMargin * 2) +
+                    "px",
             };
         },
 
@@ -163,7 +178,10 @@ export default {
          */
         timeSinceFirstBeat() {
             const firstValidBeat = this.shortBeatList.at(this.numPadding);
-            const minutes = dayjs().diff(dayjs.utc(firstValidBeat?.time), "minutes");
+            const minutes = dayjs().diff(
+                dayjs.utc(firstValidBeat?.time),
+                "minutes"
+            );
             if (minutes > 60) {
                 return (minutes / 60).toFixed(0) + "h";
             } else {
@@ -178,7 +196,10 @@ export default {
          */
         timeSinceLastBeat() {
             const lastValidBeat = this.shortBeatList.at(-1);
-            const seconds = dayjs().diff(dayjs.utc(lastValidBeat?.time), "seconds");
+            const seconds = dayjs().diff(
+                dayjs.utc(lastValidBeat?.time),
+                "seconds"
+            );
 
             let tolerance = 60 * 2; // default for when monitorList not available
             if (this.$root.monitorList[this.monitorId] != null) {
@@ -192,7 +213,7 @@ export default {
             } else {
                 return (seconds / 60 / 60).toFixed(0) + "h ago";
             }
-        }
+        },
     },
     watch: {
         beatList: {
@@ -224,6 +245,12 @@ export default {
             this.beatMargin = 2;
         }
 
+        if (this.size === "medium") {
+            this.beatWidth = 10;
+            this.beatHeight = 42;
+            this.beatMargin = 4;
+        }
+
         // Suddenly, have an idea how to handle it universally.
         // If the pixel * ratio != Integer, then it causes render issue, round it to solve it!!
         const actualWidth = this.beatWidth * window.devicePixelRatio;
@@ -234,7 +261,8 @@ export default {
         }
 
         if (!Number.isInteger(actualMargin)) {
-            this.beatMargin = Math.round(actualMargin) / window.devicePixelRatio;
+            this.beatMargin =
+                Math.round(actualMargin) / window.devicePixelRatio;
         }
 
         window.addEventListener("resize", this.resize);
@@ -244,7 +272,10 @@ export default {
         /** Resize the heartbeat bar */
         resize() {
             if (this.$refs.wrap) {
-                this.maxBeat = Math.floor(this.$refs.wrap.clientWidth / (this.beatWidth + this.beatMargin * 2));
+                this.maxBeat = Math.floor(
+                    this.$refs.wrap.clientWidth /
+                        (this.beatWidth + this.beatMargin * 2)
+                );
             }
         },
 
@@ -255,9 +286,11 @@ export default {
          * @returns {string}
          */
         getBeatTitle(beat) {
-            return `${this.$root.datetime(beat.time)}` + ((beat.msg) ? ` - ${beat.msg}` : "");
+            return (
+                `${this.$root.datetime(beat.time)}` +
+                (beat.msg ? ` - ${beat.msg}` : "")
+            );
         },
-
     },
 };
 </script>

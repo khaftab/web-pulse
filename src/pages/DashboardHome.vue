@@ -2,10 +2,13 @@
     <transition ref="tableContainer" name="slide-fade" appear>
         <div v-if="$route.name === 'DashboardHome'">
             <h1 class="mb-3">
-                {{ $t("Quick Stats") }}
+                {{ $t("Overview") }}
             </h1>
 
-            <div class="shadow-box big-padding text-center mb-4">
+            <div
+                class="shadow-box big-padding text-center mb-4"
+                style="box-shadow: 6px 6px 37px -7px rgba(106, 153, 78, 0.6)"
+            >
                 <div class="row">
                     <div class="col">
                         <h3>{{ $t("Up") }}</h3>
@@ -13,38 +16,63 @@
                     </div>
                     <div class="col">
                         <h3>{{ $t("Down") }}</h3>
-                        <span class="num text-danger">{{ $root.stats.down }}</span>
+                        <span class="num text-danger">{{
+                            $root.stats.down
+                        }}</span>
                     </div>
-                    <div class="col">
+                    <!-- <div class="col">
                         <h3>{{ $t("Maintenance") }}</h3>
-                        <span class="num text-maintenance">{{ $root.stats.maintenance }}</span>
+                        <span class="num text-maintenance">{{
+                            $root.stats.maintenance
+                        }}</span>
                     </div>
                     <div class="col">
                         <h3>{{ $t("Unknown") }}</h3>
-                        <span class="num text-secondary">{{ $root.stats.unknown }}</span>
+                        <span class="num text-secondary">{{
+                            $root.stats.unknown
+                        }}</span>
                     </div>
                     <div class="col">
                         <h3>{{ $t("pauseDashboardHome") }}</h3>
-                        <span class="num text-secondary">{{ $root.stats.pause }}</span>
-                    </div>
+                        <span class="num text-secondary">{{
+                            $root.stats.pause
+                        }}</span>
+                    </div> -->
                 </div>
             </div>
 
-            <div class="shadow-box table-shadow-box" style="overflow-x: hidden;">
+            <div
+                class="shadow-box"
+                style="
+                    overflow-x: hidden;
+                    box-shadow: 6px 6px 37px -7px rgba(106, 153, 78, 0.6);
+                "
+            >
                 <table class="table table-borderless table-hover">
                     <thead>
                         <tr>
                             <th>{{ $t("Name") }}</th>
                             <th>{{ $t("Status") }}</th>
-                            <th>{{ $t("DateTime") }}</th>
-                            <th>{{ $t("Message") }}</th>
+                            <th>{{ $t("Date & Time") }}</th>
+                            <th>{{ $t("Response") }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(beat, index) in displayedRecords" :key="index" :class="{ 'shadow-box': $root.windowWidth <= 550}">
-                            <td><router-link :to="`/dashboard/${beat.monitorID}`">{{ beat.name }}</router-link></td>
+                        <tr
+                            v-for="(beat, index) in displayedRecords"
+                            :key="index"
+                            :class="{ 'shadow-box': $root.windowWidth <= 550 }"
+                        >
+                            <td>
+                                <router-link
+                                    :to="`/dashboard/${beat.monitorID}`"
+                                    >{{ beat.name }}</router-link
+                                >
+                            </td>
                             <td><Status :status="beat.status" /></td>
-                            <td :class="{ 'border-0':! beat.msg}"><Datetime :value="beat.time" /></td>
+                            <td :class="{ 'border-0': !beat.msg }">
+                                <Datetime :value="beat.time" />
+                            </td>
                             <td class="border-0">{{ beat.msg }}</td>
                         </tr>
 
@@ -84,8 +112,8 @@ export default {
     props: {
         calculatedHeight: {
             type: Number,
-            default: 0
-        }
+            default: 0,
+        },
     },
     data() {
         return {
@@ -100,7 +128,6 @@ export default {
         };
     },
     computed: {
-
         importantHeartBeatList() {
             let result = [];
 
@@ -165,11 +192,13 @@ export default {
             const additionalPerPage = Math.floor(availableHeight / 58);
 
             if (additionalPerPage > 0) {
-                this.perPage = Math.max(this.initialPerPage, this.perPage + additionalPerPage);
+                this.perPage = Math.max(
+                    this.initialPerPage,
+                    this.perPage + additionalPerPage
+                );
             } else {
                 this.perPage = this.initialPerPage;
             }
-
         },
     },
 };
